@@ -14,13 +14,13 @@ jobs:
               run: sudo mkdir /work
             - name: clone
               working-directory: /work
-              run: git clone https://github.com/zxcyec/gpac.git
+              run: sudo git clone https://github.com/zxcyec/gpac.git
             - name: configure
               working-directory: /work
-              run: ls && ./configure --static-build
+              run: ls && sudo ./configure --static-build
             - name: make
               working-directory: /work
-              run: make -j${noproc}
+              run: sudo make -j${noproc}
             - uses: actions/upload-artifact@v4
               with:
                 name: CCExtractor Linux build
