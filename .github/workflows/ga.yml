@@ -14,7 +14,7 @@ jobs:
               run: sudo mkdir /work
             - name: clone
               working-directory: /work
-              run: git clone https://github.com/zxcyec/gpac
+              run: git clone https://github.com/zxcyec/gpac.git
             - name: configure
               working-directory: /work
               run: ls && ./configure --static-build
