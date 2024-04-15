@@ -29,7 +29,12 @@ jobs:
         runs-on: ubuntu-latest
         if:  ${{ github.ref != 'refs/heads/master' || github.event_name != 'push' }}
         steps:
-            - name: Check out code
-              uses: actions/checkout@v3
-            - name: build image
-              run: docker build -t gpac-ubuntu -f build/docker/ubuntu.Dockerfile .
+            - name: Install dep
+              run: apt update && apt install -y zlib1g-dev libfreetype6-dev libjpeg62-dev libpng-dev libmad0-dev libfaad-dev libogg-dev libvorbis-dev libtheora-dev liba52-0.7.4-dev libavcodec-dev libavformat-dev libavutil-dev libswscale-dev libavdevice-dev libnghttp2-dev libopenjp2-7-dev libcaca-dev libxv-dev x11proto-video-dev libgl1-mesa-dev libglu1-mesa-dev x11proto-gl-dev libxvidcore-dev libssl-dev libjack-jackd2-dev libasound2-dev libpulse-dev libsdl2-dev dvb-apps mesa-utils
+            - name: Build
+              run: ./configure --static-build && make -j${noproc}
+            - uses: actions/upload-artifact@v4
+              with:
+                name: CCExtractor Linux build
+                path: .
+            
