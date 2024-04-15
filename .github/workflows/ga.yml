@@ -20,9 +20,9 @@ jobs:
               run: ls && sudo ./configure --static-build
             - name: make
               working-directory: /work/gpac
-              run: sudo make -j${noproc}
+              run: sudo make lib -j${noproc}
             - uses: actions/upload-artifact@v4
               with:
                 name: CCExtractor Linux build
-                path: /work/gpac
+                path: /work/gpac/bin
             
